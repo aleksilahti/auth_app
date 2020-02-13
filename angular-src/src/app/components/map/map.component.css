@@ -1,0 +1,66 @@
+.map{
+  height: 100%;
+  width: 100%;
+}
+.button{
+
+  background-color: white;
+  border: 2px solid grey;
+  border-radius: 50px;
+  color: black;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  border-radius: 1px;
+  margin: 5px;
+  max-width: 30%;
+  border-radius: 10px;
+  border-collapse: separate;
+}
+button:hover{
+  transition-duration: 0.4s;
+  background-color: white;
+  border: 2px solid white;
+  color: black;
+  border-radius: 10px;
+  border-collapse: separate;
+}
+.center{
+  top: 90%;
+  width: 100%;
+  position: fixed;
+  z-index: 999;
+  text-align: center;
+}
+.cancelButton{
+
+  background-color: white;
+  border: 2px solid red;
+  border-radius: 50px;
+  color: black;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  border-radius: 1px;
+  margin: 5px;
+  max-width: 30%;
+  border-radius: 10px;
+  border-collapse: separate;
+
+}
+.cancelButton:hover{
+  transition-duration: 0.4s;
+  background-color: lightgrey;
+  border: 2px solid red;
+  color: black;
+  border-radius: 10px;
+  border-collapse: separate;
+}
