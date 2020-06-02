@@ -1,7 +1,7 @@
 <div class="jumbotron text-center">
   <h1>Smartcampus</h1>
   <p class="lead">Welcome to the Oulu university Smartcampus application</p>
-  <div>
+  <div *ngIf="!authService.loggedIn()">
     <a class="btn btn-primary" [routerLink]="['/register']">Register</a> <a class="btn btn-default" [routerLink]="['/login']">Login</a>
   </div>
 </div>
@@ -9,7 +9,7 @@
 <div class="row">
   <div class="col-md-6">
     <h3>Device management</h3>
-    <p>Add new devices or manage old installations using a map view. Color of the icon tells you the installation status <span style="color: red;">planned</span>/<span style="color: orange;">installed</span>/<span style="color: green;">online</span>.</p>
+    <p> When logged in add new devices or manage old installations using a map view. Color of the icon tells you the installation status <span style="color: red;">planned</span>/<span style="color: orange;">installed</span>/<span style="color: green;">online</span>.</p>
   </div>
   <div class="col-md-6">
     <a [routerLink]="['/map']"><h3>Device map</h3></a>

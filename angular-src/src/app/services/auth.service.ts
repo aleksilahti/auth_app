@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { JwtHelperService } from "@auth0/angular-jwt";
+
 
 interface RegisterResponse {
   success: boolean;
@@ -15,6 +15,10 @@ interface AuthResponse {
   user: any;
 }
 
+interface ProfileResponse {
+  user: any;
+}
+
 @Injectable()
 export class AuthService {
   authToken: any;
@@ -24,16 +28,23 @@ export class AuthService {
 
   registerUser(user) {
     // returns RegisterResponse
-    return this.http.post<RegisterResponse>( 'http:///localhost:3000/users/register', user);
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    return this.http.post<RegisterResponse>( 'http:///localhost:3000/users/register', user, { headers });
   }
 
   authenticateUser(user) {
     // returns AuthResponse
-    return this.http.post<AuthResponse>( 'http:///localhost:3000/users/authenticate', user);
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    return this.http.post<AuthResponse>( 'http:///localhost:3000/users/authenticate', user, { headers });
   }
 
   getProfile() {
-
+    this.loadToken();
+    const headers = new HttpHeaders().append('Authorization', this.authToken).append('Content-Type', 'application/json');
+    // returns AuthResponse
+    return this.http.get<ProfileResponse>( 'http:///localhost:3000/users/profile', { headers });
   }
 
   storeUserData(token, user) {
@@ -43,10 +54,23 @@ export class AuthService {
     this.user = user;
   }
 
-  logOut(){
+  loadToken() {
+    const token = localStorage.getItem('id_token');
+    this.authToken = token;
+  }
+
+  logOut() {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
   }
 
+  loggedIn(){
+    //Checks if the users token is not expired
+    this.loadToken;
+    const helper = new JwtHelperService();
+    return !helper.isTokenExpired(this.authToken);
+  }
+
 }
+

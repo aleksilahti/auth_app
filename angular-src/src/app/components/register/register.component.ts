@@ -43,6 +43,10 @@ export class RegisterComponent implements OnInit {
 
 
     //Require valid username
+    if (!this.validateService.validateStringMinMaxLength(user.name, 3, 50 )) {
+      this.flashMessage.show('Username needs to be between 3-50 characters.', {cssClass: 'alert-danger', timeout: 4000});
+      return false;
+    }
 
     // Require valid email
     if (!this.validateService.validateEmail(user.email)) {
@@ -58,7 +62,6 @@ export class RegisterComponent implements OnInit {
 
     // Register user
     this.authService.registerUser(user).subscribe(res => {
-      console.log(res);
       if ( res.success) {
         this.flashMessage.show('You\'re now registered and can login', {cssClass: 'alert-success', timeout: 4000});
         this.router.navigate(['/login']);
