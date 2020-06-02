@@ -14,13 +14,33 @@ router.post('/register', (req, res, next) => {
         password: req.body.password
     });
 
-    User.addUser(newUser, (err, user) => {
-        if(err){
-            res.json({success: false, msg:'failed to register user'});
-        } else {
-            res.json({success: true, msg:'User registered'});
-        }
+    User.getUSerByUsername(newUser.username, (err, user) => {
+      if(err){
+        res.json({success: false, msg:'Something went wrong'});
+      }
+      if(user){
+          return res.json({success: false, msg: 'Username taken, Please select a new username'});
+      } else {
+        User.getUSerByEmail(newUser.email, (err, user) => {
+          if(err){
+            res.json({success: false, msg:'Something went wrong'});
+          }
+          if(user){
+              return res.json({success: false, msg: 'Email is already registered. Please use another email or try to login.'});
+          } else {
+            User.addUser(newUser, (err, user) => {
+              if(err){
+                  res.json({success: false, msg:'failed to register user'});
+              } else {
+                  res.json({success: true, msg:'User was successfully registered'});
+              }
+          });
+        }}); 
+      }
+    
     });
+
+    
 });
 
 
@@ -45,6 +65,7 @@ router.post('/authenticate', (req, res, next) => {
 
                 res.json({
                     success: true,
+                    msg: 'Authentication successful',
                     token: 'JWT ' + token,
                     user: {
                         id: user._id,

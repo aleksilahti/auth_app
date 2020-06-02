@@ -16,6 +16,7 @@ import { MapComponent } from './components/map/map.component';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { NewdeviceComponent } from './components/newdevice/newdevice.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'dashboard', component: DashboardComponent},
-  {path: 'map', component: MapComponent}
+  {path: 'map', component: MapComponent},
+  {path: 'newdevice', component: NewdeviceComponent}
 ];
 
 @NgModule({
@@ -35,7 +37,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     ProfileComponent,
     DashboardComponent,
-    MapComponent
+    MapComponent,
+    NewdeviceComponent
   ],
   imports: [
     BrowserModule,

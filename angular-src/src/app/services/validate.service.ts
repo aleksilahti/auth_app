@@ -19,4 +19,22 @@ export class ValidateService {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   }
+
+  validatePassword(password){
+    //Test if password fills required security details
+    if ( password.length >= 8 ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  validateStringMinMaxLength( stringValue, min, max ) {
+    console.log(stringValue.length);
+    if ( max >= stringValue.length && stringValue.length >= min) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
